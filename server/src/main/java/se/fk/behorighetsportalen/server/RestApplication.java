@@ -1,9 +1,9 @@
-package se.fk.behorighetsportalen.server.rest;
+package se.fk.behorighetsportalen.server;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("/")
+@ApplicationPath("/rest")
 public class RestApplication extends Application {
 
 }

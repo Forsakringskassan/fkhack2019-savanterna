@@ -11,45 +11,13 @@ export interface ansokning {
 export class Granska extends React.Component<{}, {}> {
 
     inkomnaAnsokningar : Array<ansokning> = [
-        {
-            user: "88880001",
-            permission: {
-                id: "1",
-                name: "Gwin10_SuperUser",
-                description: "Ger användaren SuperUser på Windows 10",
-                categories: []
-            },
-        },
-        {
-            user: "88880002",
-            permission: {
-                id: "2",
-                name: "GStashUser",
-                description: "Ger användaren behörighet att läsa och redigera i Stash",
-                categories: []
-            },
-        }
+        { user: "88880001", permission: new Behorighet("1", "Gwin10_SuperUser", "Ger användaren SuperUser på Windows 10", []),},
+        { user: "88880002", permission: new Behorighet("2", "GStashUser", "Ger användaren behörighet att läsa och redigera i Stash", []),}
     ]
 
     tilldeladeAnsokningar : Array<ansokning> = [
-        {
-            user: "88880001",
-            permission: {
-                id: "3",
-                name: "GConfluence_User",
-                description: "Ger användaren behörighet att läsa och redigera i Confluence",
-                categories: []
-            },
-        },
-        {
-            user: "88880001",
-            permission: {
-                id: "3",
-                name: "GSkype_Admin",
-                description: "Ger användaren behörighet att använda Skype",
-                categories: []
-            },
-        }
+        { user: "88880001", permission: new Behorighet("3", "GConfluence_User", "Ger användaren behörighet att läsa och redigera i Confluence", []),},
+        { user: "88880001", permission: new Behorighet("3", "GSkype_Admin", "Ger användaren behörighet att använda Skype", []),}
     ]
 
     constructor(props: any){
@@ -110,10 +78,10 @@ export class Granska extends React.Component<{}, {}> {
                             <Table.HeaderCell content={"Godkänn/Neka"}/>
                         </Table.Row>
                     </Table.Header>
-                        <Table.Body>
-                            {this.getRowsInkomna()}
-                        </Table.Body>
-                    </Table>
+                    <Table.Body>
+                        {this.getRowsInkomna()}
+                    </Table.Body>
+                </Table>
 
 
                 <Header as={"h2"} dividing>Tilldelade behörigheter</Header>
