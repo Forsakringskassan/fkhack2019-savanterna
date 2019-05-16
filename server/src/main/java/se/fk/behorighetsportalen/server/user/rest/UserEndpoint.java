@@ -18,14 +18,14 @@ public class UserEndpoint {
 
     private static Logger logger = Logger.getLogger(UserEndpoint.class);
 
-    @GET
-    @Path("/test")
+    @POST
+    @Path("/skapa")
     @Produces(MediaType.TEXT_PLAIN)
     public Response createUser() {
         logger.info("UserEndpoint.createUser()");
-
+//Todo: Skapa användare i DB
         try {
-            return Response.ok().entity("Hello World!").build();
+            return Response.ok().entity("").build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();
@@ -51,7 +51,18 @@ public class UserEndpoint {
             e.printStackTrace();
             return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();
         }
+    }
 
+    @GET
+    @Path("ansokningar/hamta/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response hamtaAnsokningar(@PathParam("id") String userId){
+        try {
+            return Response.ok().entity("").build();
+        } catch (Exception e){
+            e.printStackTrace();
+            return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();
+        }
     }
 
 
