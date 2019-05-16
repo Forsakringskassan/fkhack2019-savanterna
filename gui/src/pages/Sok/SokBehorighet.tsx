@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Header, Container, Grid, Segment, Search, Dropdown } from "semantic-ui-react"; 
-import BehorigheterAllUser from "../Behorigheter/Behorigheter-all-user";
+import { Header, Container, Dropdown } from "semantic-ui-react"; 
 
 const mockResults = [{  
   key: "GIT User",
@@ -36,32 +35,34 @@ interface State {
    value: any,
   
 }
-const initialState = { isLoading: false, results: [] as Array<any>, value: '', }
 
 export class SokBehorighet extends React.Component<State, Props> {
 
-    state = {isLoading: false,
-    results: [] as Array<any>,
-    value: 'Sök...'}
+  constructor(props: any){
+    super(props);
+    this.state = {
+      isLoading: false,
+      results: [],
+      value: ""
+    };    
+  }
 
-
-    render() {
-      
-        return (
-            <Container>
-                    <Header as={"h1"}>Sök Behörighet</Header>
-          <Dropdown
-            fluid
-            search
-            selection
-            options={mockResults}
-            scrolling
-
-          />
+  render() {    
+    return (
+      <Container>
+        <Header as={"h1"} dividing>Sök Behörighet</Header>
+        <Dropdown
+          fluid
+          search
+          selection
+          options={mockResults}
+          scrolling
+          placeholder={"Sök..."}
+        />
 
       </Container>
-        )
-    }
+    )
+  }
 }
 
 export default SokBehorighet;

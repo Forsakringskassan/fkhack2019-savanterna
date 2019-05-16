@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Segment, Header, Card, Table, Button, Container } from "semantic-ui-react";
+import { Header, Table, Button, Container } from "semantic-ui-react";
 import Behorighet from "../../classes/Behorighet";
 
 export interface ansokning {
@@ -82,7 +82,6 @@ export class Granska extends React.Component<{}, {}> {
                         {this.getRowsInkomna()}
                     </Table.Body>
                 </Table>
-
 
                 <Header as={"h2"} dividing>Tilldelade behörigheter</Header>
                 <Table padded compact>
