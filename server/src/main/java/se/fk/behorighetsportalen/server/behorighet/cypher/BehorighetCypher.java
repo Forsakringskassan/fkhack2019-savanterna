@@ -121,18 +121,17 @@ public class BehorighetCypher {
 
     public static List<Behorighet> hamtaBehorigheter(List<String> ids, Transaction tx) {
         List<Behorighet> behorigheter = new ArrayList<>();
-        String query = "MATCH(b:Behörighet) " +
-                "WHERE b.id IN {ids} " +
-                "OPTIONAL MATCH(b)-[:GRANSKAS_AV]->(u:User) " +
-                "OPTIONAL MATCH(b)-[:TILLHÖR]->(k:Kategori) " +
-                "RETURN DISTINCT b as behorighet, collect(distinct k) as kategorier, u as granskare";
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("ids", ids);
-        StatementResult sr = tx.run(query, parameters);
-
-
-
-        behorigheter = resultsToListBehorighet(sr);
+        if(ids.size() > 0) {
+            String query = "MATCH(b:Behörighet) " +
+                    "WHERE b.id IN {ids} " +
+                    "OPTIONAL MATCH(b)-[:GRANSKAS_AV]->(u:User) " +
+                    "OPTIONAL MATCH(b)-[:TILLHÖR]->(k:Kategori) " +
+                    "RETURN DISTINCT b as behorighet, collect(distinct k) as kategorier, u as granskare";
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("ids", ids);
+            StatementResult sr = tx.run(query, parameters);
+            behorigheter = resultsToListBehorighet(sr);
+        }
         return behorigheter;
     }
 
