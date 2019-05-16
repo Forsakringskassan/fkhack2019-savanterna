@@ -1,13 +1,13 @@
 import * as React from "react";
-import { Menu, Icon, Segment, Container, Header, Button } from "semantic-ui-react"
+import { Menu, Icon, Segment } from "semantic-ui-react"
 import { Route, NavLink, HashRouter } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css'
 
 import Home from "./pages/Home"
 import SokBehorighet from "./pages/SokBehorighet";
 import Behorigheter from "./pages/Behorigheter";
-
 import Granska from "./pages/Granska"
+import Admin from "./pages/Admin"
 
 export class App extends React.Component<{}, {}> {
     forceUpdate(callBack?: () => void): void {
@@ -39,6 +39,7 @@ export class App extends React.Component<{}, {}> {
                     <Route exact path="/behorigheter" component={Behorigheter}/>
                     <Route exact path="/ansokningar" component={Behorigheter}/>
                     <Route exact path="/granska" component={Granska}/>
+                    <Route exact path="/admin" component={Admin}/>
                     </Segment>
             
                 </div>

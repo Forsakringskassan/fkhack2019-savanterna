@@ -36,7 +36,7 @@ export class Home extends React.Component<{}, {}> {
                 </Header>
 
                 <Header as='h2'>
-                <Button fluid disabled onClick={()=>this.handleButton("admin")} color='olive' size='massive'>Administrera behörigheter</Button>
+                <Button fluid onClick={()=>this.handleButton("admin")} color='olive' size='massive'>Administrera behörigheter</Button>
                 <Header.Subheader>Här kan du administrera behörighetsgrupper</Header.Subheader>
                 </Header>
 
