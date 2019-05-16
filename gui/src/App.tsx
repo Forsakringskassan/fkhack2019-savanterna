@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 import Home from "./pages/Home"
 import Test from "./pages/Test"
+import SokBehorighet from "./pages/SokBehorighet";
 
 export class App extends React.Component<{}, {}> {
 
@@ -26,10 +27,15 @@ export class App extends React.Component<{}, {}> {
                         <Icon name='circle' />
                         Test
                     </Menu.Item>
+                    <Menu.Item as={NavLink} exact to="/sokbehorighet">
+                    <Icon name='search'/>
+                    Sök Behörighet
+                    </Menu.Item>
                 </Menu>
                 <Segment basic className='content'>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/test" component={Test}/>
+                    <Route exact path="/sokbehorighet" component={SokBehorighet}/>
                 </Segment>
             </div>
         </HashRouter>
