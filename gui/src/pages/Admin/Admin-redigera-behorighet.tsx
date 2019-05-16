@@ -2,11 +2,13 @@ import * as React from "react";
 
 import { Table, Button, Label, List } from "semantic-ui-react";
 import Behorighet from "../../classes/Behorighet";
+import RestService from "../../rest/rest-service";
 
 export class AdminRedigeraBehorighet extends React.Component<{}, {}> {
 
     constructor(props: any){
-        super(props)
+        super(props);
+        this.update();
     }
 
     b1:Behorighet = new Behorighet("1", "Behörighet1", "Denna används för blip", ["Systemutvecklare", "IT-samordnare"]);
@@ -15,6 +17,22 @@ export class AdminRedigeraBehorighet extends React.Component<{}, {}> {
     b4:Behorighet = new Behorighet("4", "Behörighet4", "Denna används för deasdaersf", []);
 
     behorigheter : Array<Behorighet> = [this.b1,this.b2, this.b3, this.b4]
+    update(){
+        RestService.hamtaBehorighet()        
+        .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Something went wrong');
+            }
+          })
+          .then((results) => {
+            console.log(results);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+    }
 
     getRowsInkomna(){
         let rows = [];
