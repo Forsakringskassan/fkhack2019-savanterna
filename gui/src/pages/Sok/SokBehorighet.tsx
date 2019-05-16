@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Card, Table, List, Label, Container, Header, Input, Button } from "semantic-ui-react"; 
+import { Table, List, Label, Container, Header, Input, Button } from "semantic-ui-react"; 
 import RestInterface from "../../rest/rest-interface";
+import RestService from "../../rest/rest-service";
 
 interface Props {
 }
@@ -8,7 +9,8 @@ interface Props {
 interface State {
   isLoading: boolean,
   results: Array<RestInterface.Behorighet>,
-  value: any,  
+  value: string,
+  sendPostRequest: boolean,
 }
 
 export class SokBehorighet extends React.Component<Props, State> {
@@ -39,15 +41,49 @@ export class SokBehorighet extends React.Component<Props, State> {
     super(props);
     this.state = {
       isLoading: false,
-      results: [this.b1, this.b2, this.b3],
-      value: ""
+      results: [],
+      value: "",
+      sendPostRequest: false,
     };    
+  }
+
+  sendPostRequest(){
+    if(this.state.sendPostRequest){
+      let self = this;
+      RestService.sokBehorighet(this.state.value)
+      .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Something went wrong');
+          }
+      })
+      .then((results) => {
+        self.setState({
+          results: [this.b1, this.b2, this.b3],
+          sendPostRequest: false,
+        });
+      })
+      .catch((error) => {
+          console.error(error);
+          self.setState({
+            results: [this.b1, this.b2, this.b3],
+            sendPostRequest: false,
+          });
+      });
+    }    
   }
 
   handleChange(event: any, data: any){
     this.setState({
       value: data.value
     });
+  }
+
+  handleClick(event: any, data: any){
+    this.setState({
+      sendPostRequest: true
+    }, () => this.sendPostRequest());
   }
 
   getResults(){
@@ -104,7 +140,9 @@ export class SokBehorighet extends React.Component<Props, State> {
         <Header as={"h1"} dividing>Sök Behörighet</Header>
         <Input fluid icon={'search'} placeholder={'Sök...'} onChange={this.handleChange.bind(this)}/>
         <br/>
-        {this.state.value.length > 0 ? this.getResults() : null}
+        <Button positive fluid content={"Sök"} onClick={this.handleClick.bind(this)} disabled={this.state.value.length === 0}/>
+        <br/>
+        {this.state.results.length > 0 ? this.getResults() : null}
 
       </Container>
     )
