@@ -1,12 +1,14 @@
 package se.fk.behorighetsportalen.server.ansokan.rest;
 
-import java.util.Objects;
-
 public class Ansokan {
+    public enum Status {
+        PÅBÖRJAD, BEVILJAD, NEKAD;
+    }
     private String id;
     private String behorighetsId;
     private String userId;
     private String granskarId;
+    private Status status;
 
     public String getId() {
         return id;
@@ -38,6 +40,14 @@ public class Ansokan {
 
     public void setGranskarId(String granskarId) {
         this.granskarId = granskarId;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     @Override
