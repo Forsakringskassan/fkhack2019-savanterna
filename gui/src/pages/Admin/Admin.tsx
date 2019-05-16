@@ -27,7 +27,7 @@ export class Admin extends React.Component<{}, {}> {
     render() {
         return (
             <Container>
-                <Header as={"h1"}>Admin</Header>
+                <Header as={"h1"} dividing>Administrera behörigheter</Header>
                 <Tab panes={this.getPanes()}/>
             </Container>
         )

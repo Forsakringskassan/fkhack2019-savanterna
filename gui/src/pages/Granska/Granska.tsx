@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { Segment, Header, Card, Table, Button, Container } from "semantic-ui-react";
-import Behorighet from "../classes/Behorighet";
+import { Header, Table, Button, Container } from "semantic-ui-react";
+import Behorighet from "../../classes/Behorighet";
 
 export interface ansokning {
     user: string,
@@ -67,7 +67,7 @@ export class Granska extends React.Component<{}, {}> {
     render() {
         return (
             <Container>
-                <Header as={"h1"}>Granska</Header>
+                <Header as={"h1"} dividing>Granska behörigheter</Header>
 
                 <Header as={"h2"} dividing>Inkomna ansökningar</Header>
                 <Table padded compact>
@@ -82,7 +82,6 @@ export class Granska extends React.Component<{}, {}> {
                         {this.getRowsInkomna()}
                     </Table.Body>
                 </Table>
-
 
                 <Header as={"h2"} dividing>Tilldelade behörigheter</Header>
                 <Table padded compact>

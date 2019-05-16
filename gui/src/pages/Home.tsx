@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Grid } from 'semantic-ui-react'
-import { Segment, Header } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import { Button } from "semantic-ui-react";
 import { Container} from 'semantic-ui-react';
 
@@ -17,34 +16,33 @@ export class Home extends React.Component<{}, {}> {
     render() {
         return (
         <Container>
-                <Header as='h1'>Behörighetsportalen</Header>
-                <br></br>
-                <br></br>
-                <Header as='h2'>
-                <Button fluid onClick={()=>this.handleButton("SokBehorighet")} color='olive' size='massive'>Sök behörigheter</Button>
-                <Header.Subheader>Här kan du söka behörigheter, behSörighetsgrupper eller miljögrupper</Header.Subheader>
+                <Header as='h1' dividing>
+                    Behörighetsportalen
                 </Header>
 
                 <Header as='h2'>
-                <Button fluid onClick={()=>this.handleButton("Behorigheter")} color='olive' size='massive'>Mina behörigheter</Button>
-                <Header.Subheader>Här kan du se pågående och avslutade behörighetsprocesser samt tilldelade behörigheter</Header.Subheader>
+                    <Button fluid onClick={()=>this.handleButton("SokBehorighet")} color='green' size='massive'>
+                        Sök behörigheter
+                    </Button>
                 </Header>
 
                 <Header as='h2'>
-                <Button fluid onClick={()=>this.handleButton("granska")} color='olive' size='massive'>Granska behörigheter</Button>
-                <Header.Subheader>Här kan du granska behörigheter som dina undersåtar skickat in</Header.Subheader>
+                    <Button fluid onClick={()=>this.handleButton("Behorigheter")} color='green' size='massive'>
+                        Mina behörigheter
+                    </Button>
                 </Header>
 
                 <Header as='h2'>
-                <Button fluid onClick={()=>this.handleButton("admin")} color='olive' size='massive'>Administrera behörigheter</Button>
-                <Header.Subheader>Här kan du administrera behörighetsgrupper</Header.Subheader>
+                    <Button fluid onClick={()=>this.handleButton("granska")} color='green' size='massive'>
+                        Granska behörigheter
+                    </Button>
                 </Header>
 
                 <Header as='h2'>
-                <Button fluid onClick={()=>this.handleButton("ovrigt")} color='olive' size='massive'>Om oss, support, kontakta oss osvsov</Button>
-                <Header.Subheader>Här kan du göra allt som man egentligen inte alls använder</Header.Subheader>
+                    <Button fluid onClick={()=>this.handleButton("admin")} color='green' size='massive'>
+                        Administrera behörigheter
+                    </Button>
                 </Header>
-
         </Container>
 
         )

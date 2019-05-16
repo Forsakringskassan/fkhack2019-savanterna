@@ -1,28 +1,48 @@
 package se.fk.behorighetsportalen.server.kategori.rest;
 
 import org.jboss.logging.Logger;
+import se.fk.behorighetsportalen.server.database.DatabaseConnector;
+import se.fk.behorighetsportalen.server.kategori.cypher.KategoriCypher;
 import se.fk.behorighetsportalen.server.user.rest.UserEndpoint;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/kategori")
 public class KategoriEndpoint {
 
     private static Logger logger = Logger.getLogger(UserEndpoint.class);
 
-    @GET
-    @Produces("text/plain")
-    public Response skapaKategori() {
+    @POST
+    @Path("/skapa")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response skapaKategori(Kategori kategori) {
         logger.info("KategoriEndpoint.skapaKategori()");
+        try {
+            KategoriCypher.createKategori(kategori, DatabaseConnector.getSession());
+            return Response.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();
+        }
+    }
+@Path("/hamta")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response hamtaKategorier() {
+        logger.info("KategoriEndpoint.hamtaKategorier()");
 
         try {
-            return Response.ok().entity("Skapa kategori").build();
+            List kategorier=new ArrayList <Kategori> ();
+            kategorier.add(new Kategori("Systemutvecklare BI","1"));
+            kategorier.add(new Kategori("Projektledare","2"));
+            kategorier.add(new Kategori("IT-Tekniker","3"));
+
+            return Response.ok().entity(kategorier).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();

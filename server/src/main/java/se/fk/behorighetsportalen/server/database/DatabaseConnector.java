@@ -30,20 +30,12 @@ public class DatabaseConnector implements AutoCloseable {
         getInstance().driver = driver;
     }
 
-    public static StatementResult runQuery(String query, Map<String, Object> parameters) throws ServerException {
-        //TODO: Skall inte utföras på detta sätt!
+
+    public static Session getSession() {
         if(getInstance().driver == null) {
             setDriver("bolt://localhost:7687", "neo4j", "admin");
         }
-
-        try (Session session = getInstance().driver.session()) {
-            return session.writeTransaction(tx -> {
-                StatementResult result = tx.run(query, parameters);
-                return result;
-            });
-        } catch (ServiceUnavailableException e) {
-            throw new ServerException("Database unavailable", HttpURLConnection.HTTP_INTERNAL_ERROR);
-        }
+        return getInstance().driver.session();
     }
 
     @Override

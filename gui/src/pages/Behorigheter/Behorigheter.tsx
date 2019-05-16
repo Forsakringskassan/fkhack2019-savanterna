@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import {Segment, Header, Container, List, Accordion, Tab} from "semantic-ui-react";
-import Behorighet from "../classes/Behorighet";
+import {Header, Container, Tab} from "semantic-ui-react";
+import Behorighet from "../../classes/Behorighet";
 import BehorigheterAllUser from "./Behorigheter-all-user";
 import BehorigheterOngoing from "./Behorigheter-ongoing";
 
@@ -52,7 +52,7 @@ export class Behorigheter extends React.Component<{}, State> {
 
         return (
             <Container>
-                <Header as={"h1"}>Behörigheter och ansökningar</Header>
+                <Header as={"h1"} dividing>Behörigheter och ansökningar</Header>
 
                 <Tab panes={this.getPanes()}/>
             </Container>

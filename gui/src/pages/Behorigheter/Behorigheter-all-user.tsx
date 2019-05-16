@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {List} from "semantic-ui-react";
-import Behorighet from "../classes/Behorighet";
+import Behorighet from "../../classes/Behorighet";
 
 interface Props {
     behorigheter: Array<Behorighet>;
