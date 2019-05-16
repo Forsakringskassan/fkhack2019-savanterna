@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Menu, Icon, Segment } from "semantic-ui-react"
+import { Menu, Icon, Segment, Container, Header, Button } from "semantic-ui-react"
 import { Route, NavLink, HashRouter } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css'
 
@@ -42,7 +42,8 @@ export class App extends React.Component<{}, {}> {
                     <Route exact path="/test" component={Test}/>
                     <Route exact path="/granska" component={Granska}/>
                 </Segment>
-            </div>
+
+        </div>
         </HashRouter>
         )
     }
