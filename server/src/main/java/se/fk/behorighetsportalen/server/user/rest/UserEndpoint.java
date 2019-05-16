@@ -35,7 +35,7 @@ public class UserEndpoint {
     //Pathparam
 
     @GET
-    @Path("/behorigheter/hamta/{id}")
+    @Path("behorigheter/hamta/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response hamtaBehorigheter(@PathParam("id") String userId) {
         List<Behorighet> behorigheter = new ArrayList<Behorighet>();
@@ -43,7 +43,7 @@ public class UserEndpoint {
         User user = new User(UUID.randomUUID().toString(), "Roger Pontare" );
         String[] kategorier = {"Första", "Tredje"};
 
-        Behorighet behorighet = new Behorighet(UUID.randomUUID().toString(),kategorier , "Ger access till systemet.", user);
+        Behorighet behorighet = new Behorighet(UUID.randomUUID().toString(),"Systemaccess" , kategorier , "Ger access till systemet.", user);
         behorighet.setId(UUID.randomUUID().toString());
 
         behorigheter.add(behorighet);
@@ -56,5 +56,6 @@ public class UserEndpoint {
         }
 
     }
-    
+
+
 }
