@@ -5,11 +5,8 @@ import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
 import se.fk.behorighetsportalen.server.CypherUtil;
 import se.fk.behorighetsportalen.server.behorighet.rest.Behorighet;
-import se.fk.behorighetsportalen.server.database.DatabaseConnector;
 import se.fk.behorighetsportalen.server.exception.ServerException;
 
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +30,7 @@ public class BehorighetCypher {
             String id = sr.single().get("id").asString();
 
             setKategorier(id, behorighet.getKategorier(), tx);
+            setGranskare(id, behorighet.getGranskare().getId(), tx);
 
             tx.success();
             return id;
@@ -41,7 +39,7 @@ public class BehorighetCypher {
 
     private static void setKategorier(String id, List<String> kategorier, Transaction tx) {
         String query = "MATCH(b:Behörighet {id: {id}}) " +
-                "MATCH(b)-[rel:TILLHÖR]->(:Kategori) " +
+                "OPTIONAL MATCH(b)-[rel:TILLHÖR]->(:Kategori) " +
                 "DELETE rel " +
                 "WITH b " +
                 "MATCH(k:Kategori) " +
@@ -51,6 +49,20 @@ public class BehorighetCypher {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("id", id);
         parameters.put("kIds", kategorier);
+        tx.run(query, parameters);
+    }
+
+    private static void setGranskare(String id, String userId, Transaction tx) {
+        String query = "MATCH(b:Behörighet {id: {id}}) " +
+                "OPTIONAL MATCH(b)-[rel:GRANSKAS_AV]->(:User) " +
+                "DELETE rel " +
+                "WITH b " +
+                "MATCH(u:User {id: {userId}}) " +
+                "MERGE(b)-[:GRANSKAS_AV]->(u)";
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("id", id);
+        parameters.put("userId", userId);
         tx.run(query, parameters);
     }
 
@@ -66,6 +78,7 @@ public class BehorighetCypher {
             tx.run(query, parameters);
 
             setKategorier(behorighet.getId(), behorighet.getKategorier(), tx);
+            setGranskare(behorighet.getId(), behorighet.getGranskare().getId(), tx);
 
             tx.success();
         }
