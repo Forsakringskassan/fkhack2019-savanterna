@@ -1,10 +1,11 @@
 import * as React from "react";
 
 import { Segment, Header, Card, Table, Button, Container } from "semantic-ui-react";
+import Behorighet from "../classes/Behorighet";
 
 export interface ansokning {
     user: string,
-    permission: string,
+    permission: Behorighet,
 }
 
 export class Granska extends React.Component<{}, {}> {
@@ -12,22 +13,42 @@ export class Granska extends React.Component<{}, {}> {
     inkomnaAnsokningar : Array<ansokning> = [
         {
             user: "88880001",
-            permission: "Gwin10_SuperUser",
+            permission: {
+                id: "1",
+                name: "Gwin10_SuperUser",
+                description: "Ger användaren SuperUser på Windows 10",
+                categories: []
+            },
         },
         {
             user: "88880002",
-            permission: "GStashUser",
+            permission: {
+                id: "2",
+                name: "GStashUser",
+                description: "Ger användaren behörighet att läsa och redigera i Stash",
+                categories: []
+            },
         }
     ]
 
     tilldeladeAnsokningar : Array<ansokning> = [
         {
             user: "88880001",
-            permission: "GConfluence_User",
+            permission: {
+                id: "3",
+                name: "GConfluence_User",
+                description: "Ger användaren behörighet att läsa och redigera i Confluence",
+                categories: []
+            },
         },
         {
             user: "88880001",
-            permission: "GSkype_Admin",
+            permission: {
+                id: "3",
+                name: "GSkype_Admin",
+                description: "Ger användaren behörighet att använda Skype",
+                categories: []
+            },
         }
     ]
 
@@ -41,9 +62,9 @@ export class Granska extends React.Component<{}, {}> {
         for(let i in this.inkomnaAnsokningar){
             let ansokning : ansokning = this.inkomnaAnsokningar[i];
             rows.push(             
-                <Table.Row key={i + "row"}>                    
+                <Table.Row key={i + "row"}>
                     <Table.Cell content={ansokning.user} key={i + ansokning.user}/>
-                    <Table.Cell content={ansokning.permission} key={i + ansokning.permission}/>
+                    <Table.Cell content={ansokning.permission.name} key={i + ansokning.permission.name}/>
                     <Table.Cell key={i + "buttons"}>
                         <Button.Group>
                             <Button content={"Neka"} negative/>
@@ -66,7 +87,7 @@ export class Granska extends React.Component<{}, {}> {
             rows.push(             
                 <Table.Row key={i + "row"}>                    
                     <Table.Cell content={ansokning.user} key={i + ansokning.user}/>
-                    <Table.Cell content={ansokning.permission} key={i + ansokning.permission}/>
+                    <Table.Cell content={ansokning.permission.name} key={i + ansokning.permission.name}/>
                     <Table.Cell content={<Button content={"Ta bort"} negative/>} key={i + "buttons"}/>               
                 </Table.Row>
             )
@@ -81,7 +102,7 @@ export class Granska extends React.Component<{}, {}> {
                 <Header as={"h1"}>Granska</Header>
 
                 <Header as={"h2"} dividing>Inkomna ansökningar</Header>
-                <Table padded>
+                <Table padded compact>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell content={"Användare"}/>
@@ -96,7 +117,7 @@ export class Granska extends React.Component<{}, {}> {
 
 
                 <Header as={"h2"} dividing>Tilldelade behörigheter</Header>
-                <Table padded>
+                <Table padded compact>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell content={"Användare"}/>
