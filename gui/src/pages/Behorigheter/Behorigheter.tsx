@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {Segment, Header, Container, List, Accordion, Tab} from "semantic-ui-react";
+import {Header, Container, Tab} from "semantic-ui-react";
 import Behorighet from "../../classes/Behorighet";
 import BehorigheterAllUser from "./Behorigheter-all-user";
 import BehorigheterOngoing from "./Behorigheter-ongoing";
