@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Table, Button, Label, List } from "semantic-ui-react";
-import Behorighet from "../classes/Behorighet";
+import Behorighet from "../../classes/Behorighet";
 
 export class AdminRedigeraBehorighet extends React.Component<{}, {}> {
 
