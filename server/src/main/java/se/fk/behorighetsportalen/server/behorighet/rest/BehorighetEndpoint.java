@@ -1,8 +1,10 @@
 package se.fk.behorighetsportalen.server.behorighet.rest;
 
 import org.jboss.logging.Logger;
+import se.fk.behorighetsportalen.server.CypherUtil;
 import se.fk.behorighetsportalen.server.behorighet.cypher.BehorighetCypher;
 import se.fk.behorighetsportalen.server.database.DatabaseConnector;
+import se.fk.behorighetsportalen.server.kategori.rest.Kategori;
 import se.fk.behorighetsportalen.server.user.rest.User;
 
 import javax.ws.rs.*;
@@ -57,10 +59,9 @@ public class BehorighetEndpoint {
     @Produces(MediaType.TEXT_PLAIN)
     public Response raderaBehorighet(@PathParam("id") String id) {
         logger.info("BehorighetEndpoint.raderaBehorighet()");
-
-        //TODO: DELETE FROM DB WHERE "ID" = id
         try {
             logger.info("Raderar behörighet med id: " + id);
+            BehorighetCypher.raderaBehorighet(id, DatabaseConnector.getSession());
             return Response.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,15 +74,8 @@ public class BehorighetEndpoint {
     @Produces(MediaType.TEXT_PLAIN)
     public Response hamtaBehorighet() {
         logger.info("BehorighetEndpoint.hamtaBehorighet()");
-
-        //TODO: SELECT * FROM BEHORIGHETER
-        List<Behorighet> behorigheter = new ArrayList<>();
-        behorigheter.add(new Behorighet("1", "GStashUser", Arrays.asList("Stash", "Systemutvecklare"), "Läsrättigheter för Stash", new User("1", "Kalle Karlsson")));
-        behorigheter.add(new Behorighet("2", "GConfluenceUser", Arrays.asList("Confluence", "Systemutvecklare", "IT-Samordnare", "Testare"), "Läsrättigheter för Confluence", new User("2", "Anna Jansson")));
-        behorigheter.add(new Behorighet("3", "GWin10SuperUser", Arrays.asList("Systemutvecklare"), "Superuser för Windows 10", new User("1", "Kalle Karlsson")));
-        behorigheter.add(new Behorighet("4", "GSkypeUser", Arrays.asList("Skype", "Systemutvecklare", "IT-Samordnare", "Testare"), "Rättigheter för att använda Skype", new User("3", "Anders Andersson")));
-
         try {
+            List<Behorighet> behorigheter = BehorighetCypher.hamtaBehorigheter(DatabaseConnector.getSession());
             return Response.ok().entity(behorigheter).build();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,10 +89,8 @@ public class BehorighetEndpoint {
     public Response sokBehorighet(@QueryParam("input") String input) {
         logger.info("BehorighetEndpoint.sokBehorighet()");
 
-        List<Behorighet> behorigheter = new ArrayList<>();
-        behorigheter.add(new Behorighet("2", "GConfluenceUser", Arrays.asList("Confluence", "Systemutvecklare", "IT-Samordnare", "Testare"), "Läsrättigheter för Confluence", new User("2", "Anna Jansson")));
-        behorigheter.add(new Behorighet("3", "GWin10SuperUser", Arrays.asList("Test"), "Superuser för Windows 10", new User("1", "Kalle Karlsson")));
         try {
+            List<Behorighet> behorigheter = BehorighetCypher.searchBehorighet(input, DatabaseConnector.getSession());
             return Response.ok().entity(behorigheter).build();
         } catch (Exception e) {
             e.printStackTrace();

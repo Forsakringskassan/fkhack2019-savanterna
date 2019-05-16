@@ -1,8 +1,10 @@
 package se.fk.behorighetsportalen.server.user.rest;
 
 import org.jboss.logging.Logger;
+import se.fk.behorighetsportalen.server.CypherUtil;
 import se.fk.behorighetsportalen.server.behorighet.rest.Behorighet;
 import se.fk.behorighetsportalen.server.behorighet.rest.BehorighetEndpoint;
+import se.fk.behorighetsportalen.server.kategori.rest.Kategori;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -40,7 +42,10 @@ public class UserEndpoint {
 
         User user = new User(UUID.randomUUID().toString(), "Roger Pontare" );
 
-        Behorighet behorighet = new Behorighet(UUID.randomUUID().toString(),"Systemaccess" , Arrays.asList("Första", "Tredje") , "Ger access till systemet.", user);
+        Kategori k1 = new Kategori(CypherUtil.generateId(), "Första");
+        Kategori k2 = new Kategori(CypherUtil.generateId(), "Andra");
+
+        Behorighet behorighet = new Behorighet(UUID.randomUUID().toString(),"Systemaccess" , Arrays.asList(k1, k2) , "Ger access till systemet.", user);
         behorighet.setId(UUID.randomUUID().toString());
 
         behorigheter.add(behorighet);
