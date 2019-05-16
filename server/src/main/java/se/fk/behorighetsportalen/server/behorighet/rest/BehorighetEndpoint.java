@@ -3,6 +3,7 @@ package se.fk.behorighetsportalen.server.behorighet.rest;
 import org.jboss.logging.Logger;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -14,10 +15,25 @@ public class BehorighetEndpoint {
 
     private static Logger logger = Logger.getLogger(BehorighetEndpoint.class);
 
+    @POST
+    @Path("/skapa")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response skapaBehorighet(Behorighet behorighet) {
+        logger.info("BehorighetEndpoint.skapaBehorighet()");
+
+        try {
+            logger.info("Skapar behörighet: " + behorighet.toString());
+            return Response.ok().entity(behorighet).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();
+        }
+    }
+
     @GET
-    @Path("/test")
+    @Path("/hamta")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response skapaBehorighet() {
+    public Response hamtaBehorighet() {
         logger.info("BehorighetEndpoint.skapaBehorighet()");
 
         try {

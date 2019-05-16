@@ -6,12 +6,14 @@ import java.util.Arrays;
 
 public class Behorighet {
     private String id;
+    private String namn;
     private String[] kategorier;
     private String beskrivning;
     private User granskare;
 
-    public Behorighet(String id, String[] kategorier, String beskrivning, User granskare) {
+    public Behorighet(String id, String namn, String[] kategorier, String beskrivning, User granskare) {
         this.id = id;
+        this.namn = namn;
         this.kategorier = kategorier;
         this.beskrivning = beskrivning;
         this.granskare = granskare;
@@ -23,6 +25,14 @@ public class Behorighet {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getNamn() {
+        return namn;
+    }
+
+    public void setNamn(String namn) {
+        this.namn = namn;
     }
 
     public String[] getKategorier() {
@@ -53,6 +63,7 @@ public class Behorighet {
     public String toString() {
         return "Behorighet{" +
                 "id='" + id + '\'' +
+                ", namn='" + namn + '\'' +
                 ", kategorier=" + Arrays.toString(kategorier) +
                 ", beskrivning='" + beskrivning + '\'' +
                 ", granskare=" + granskare +
