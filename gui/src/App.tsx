@@ -6,7 +6,6 @@ import 'semantic-ui-css/semantic.min.css'
 import Home from "./pages/Home"
 import Test from "./pages/Test"
 import SokBehorighet from "./pages/SokBehorighet";
-import Ansokningar from "./pages/Ansokningar";
 import Behorigheter from "./pages/Behorigheter";
 
 import Granska from "./pages/Granska"
@@ -37,15 +36,15 @@ export class App extends React.Component<{}, {}> {
                     <Icon name='search'/>
                     Sök Behörighet
                     </Menu.Item>
+                    </Menu>
                 <Segment basic className='content'>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/test" component={Test}/>
                     <Route exact path="/sokbehorighet" component={SokBehorighet}/>
-                    <Route exact path="/ansokningar" component={Ansokningar}/>
+                    <Route exact path="/behorigheter" component={Behorigheter}/>
                     <Route exact path="/granska" component={Granska}/>
                     </Segment>
-                
-                </Menu>
+            
                 </div>
         </HashRouter>
         )

@@ -19,21 +19,16 @@ export class SokBehorighet extends React.Component<State, Props> {
     render() {
         return (
             <Container>
-                <div>
-                    <Header>Sök Behörighet</Header>
-                </div>
-                <Grid>
-        <Grid.Column width={6}>
+                    <Header as={"h1"}>Sök Behörighet</Header>
           <Search
             fluid
             loading={this.state.isLoading}
-            onResultSelect={() => alert("LOL")}
-            onSearchChange={() => alert("Lol2")}
+            onResultSelect={() => ("")}
+            onSearchChange={() => ("")}
             results={[]}
           />
-        </Grid.Column>
-      </Grid>
-            </Container>
+
+      </Container>
         )
     }
 }
