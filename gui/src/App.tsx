@@ -38,7 +38,6 @@ export class App extends React.Component<{}, {}> {
                     </Menu>
                 <Segment basic className='content'>
                     <Route exact path="/" component={Home}/>
-                    <Route exact path="/test" component={Test}/>
                     <Route exact path="/sokbehorighet" component={SokBehorighet}/>
                     <Route exact path="/behorigheter" component={Behorigheter}/>
                     <Route exact path="/ansokningar" component={Behorigheter}/>
