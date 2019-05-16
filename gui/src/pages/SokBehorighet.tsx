@@ -1,19 +1,39 @@
 import * as React from "react";
-import { Header } from "semantic-ui-react";
+import { Header, Container, Grid, Segment, Search } from "semantic-ui-react"; 
 
-export class SokBehorighet extends React.Component<{}, {}> {
+interface Props {
+}
 
-    constructor(props: any){
-        super(props)
-    }
+interface State {
+  isLoading: false,
+  results: [],
+   value: '';
+}
+const initialState = { isLoading: false, results: [] as Array<any>, value: '' }
+
+export class SokBehorighet extends React.Component<State, Props> {
+
+    state = initialState
+    
 
     render() {
         return (
-        <div>
-                <Header>Sök Behörighet</Header>
-                
-        </div>
-        
+            <Container>
+                <div>
+                    <Header>Sök Behörighet</Header>
+                </div>
+                <Grid>
+        <Grid.Column width={6}>
+          <Search
+            fluid
+            loading={this.state.isLoading}
+            onResultSelect={() => alert("LOL")}
+            onSearchChange={() => alert("Lol2")}
+            results={[]}
+          />
+        </Grid.Column>
+      </Grid>
+            </Container>
         )
     }
 }
