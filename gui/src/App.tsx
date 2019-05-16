@@ -6,8 +6,11 @@ import 'semantic-ui-css/semantic.min.css'
 import Home from "./pages/Home"
 import Test from "./pages/Test"
 import SokBehorighet from "./pages/SokBehorighet";
+import Ansokningar from "./pages/Ansokningar";
 
 export class App extends React.Component<{}, {}> {
+    forceUpdate(callBack?: () => void): void {
+    }
 
     constructor(props: any){
         super(props)
@@ -23,9 +26,9 @@ export class App extends React.Component<{}, {}> {
                         <Icon name='home' />
                         Home
                     </Menu.Item>
-                    <Menu.Item as={NavLink} exact to="/test">
+                    <Menu.Item as={NavLink} exact to="/ansokningar">
                         <Icon name='circle' />
-                        Test
+                        Ansökningar
                     </Menu.Item>
                     <Menu.Item as={NavLink} exact to="/sokbehorighet">
                     <Icon name='search'/>
@@ -36,6 +39,7 @@ export class App extends React.Component<{}, {}> {
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/test" component={Test}/>
                     <Route exact path="/sokbehorighet" component={SokBehorighet}/>
+                    <Route exact path="/ansokningar" component={Ansokningar}/>
                 </Segment>
             </div>
         </HashRouter>
