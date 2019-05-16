@@ -1,6 +1,8 @@
 package se.fk.behorighetsportalen.server.kategori.rest;
 
 import org.jboss.logging.Logger;
+import se.fk.behorighetsportalen.server.database.DatabaseConnector;
+import se.fk.behorighetsportalen.server.kategori.cypher.KategoriCypher;
 import se.fk.behorighetsportalen.server.user.rest.UserEndpoint;
 
 import javax.ws.rs.*;
@@ -16,18 +18,19 @@ public class KategoriEndpoint {
     private static Logger logger = Logger.getLogger(UserEndpoint.class);
 
     @POST
+    @Path("/skapa")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response skapaKategori(Kategori kategori) {
         logger.info("KategoriEndpoint.skapaKategori()");
-
         try {
+            KategoriCypher.createKategori(kategori, DatabaseConnector.getSession());
             return Response.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();
         }
     }
-@Path("/hamtakategorier")
+@Path("/hamta")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response hamtaKategorier() {
