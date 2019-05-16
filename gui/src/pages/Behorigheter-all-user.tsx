@@ -4,11 +4,11 @@ import {List} from "semantic-ui-react";
 import Behorighet from "../classes/Behorighet";
 
 interface Props {
-    ansokningar: Array<Behorighet>;
+    behorigheter: Array<Behorighet>;
 }
 
 interface State {
-    ansokningar: Array<Behorighet>;
+    behorigheter: Array<Behorighet>;
 }
 
 export class BehorigheterAllUser extends React.Component<Props, State> {
@@ -17,30 +17,32 @@ export class BehorigheterAllUser extends React.Component<Props, State> {
         super(props);
 
         this.state = {
-            ansokningar: props.ansokningar
+            behorigheter: props.behorigheter
         };
     }
 
     componentWillReceiveProps(nextProps: Readonly<Props>, nextContext: any): void {
         this.setState({
-            ansokningar: nextProps.ansokningar
+            behorigheter: nextProps.behorigheter
         })
     }
 
     getList() {
         let render: Array<any> = [];
-        this.state.ansokningar.forEach(item => {
-            render.push(<List.Item key={item.id}>
-                <List.Content>
-                    <List.Header>
-                        { item.name }
-                    </List.Header>
-                    <List.Description>
-                        { item.description }
-                    </List.Description>
-                </List.Content>
-            </List.Item>);
-        });
+        if(this.state.behorigheter !== undefined) {
+            this.state.behorigheter.forEach(item => {
+                render.push(<List.Item key={item.id}>
+                    <List.Content>
+                        <List.Header>
+                            { item.name }
+                        </List.Header>
+                        <List.Description>
+                            { item.description }
+                        </List.Description>
+                    </List.Content>
+                </List.Item>);
+            });
+        }
 
         return render;
     }
