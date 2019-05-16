@@ -4,10 +4,14 @@ import { Route, NavLink, HashRouter } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css'
 
 import Home from "./pages/Home"
+<<<<<<< HEAD
 import Test from "./pages/Test"
 import SokBehorighet from "./pages/SokBehorighet";
 import Behorigheter from "./pages/Behorigheter";
 
+=======
+import Behorigheter from "./pages/Behorigheter";
+>>>>>>> 04ceb2a147ac8205dfe1c21d146e6098569294e6
 import Granska from "./pages/Granska"
 
 export class App extends React.Component<{}, {}> {
@@ -42,6 +46,7 @@ export class App extends React.Component<{}, {}> {
                     <Route exact path="/test" component={Test}/>
                     <Route exact path="/sokbehorighet" component={SokBehorighet}/>
                     <Route exact path="/behorigheter" component={Behorigheter}/>
+                    <Route exact path="/ansokningar" component={Behorigheter}/>
                     <Route exact path="/granska" component={Granska}/>
                     </Segment>
             
