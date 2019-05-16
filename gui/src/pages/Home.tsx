@@ -43,13 +43,6 @@ export class Home extends React.Component<{}, {}> {
                         Administrera behörigheter
                     </Button>
                 </Header>
-
-                <Header as='h2'>
-                    <Button fluid onClick={()=>this.handleButton("ovrigt")} color='green' size='massive'>
-                        Kontakta oss
-                    </Button>
-                </Header>
-
         </Container>
 
         )
