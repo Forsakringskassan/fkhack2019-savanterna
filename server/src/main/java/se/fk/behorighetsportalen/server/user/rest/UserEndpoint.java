@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,9 +32,6 @@ public class UserEndpoint {
         }
     }
 
-    //Queryparam
-    //Pathparam
-
     @GET
     @Path("behorigheter/hamta/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -41,9 +39,8 @@ public class UserEndpoint {
         List<Behorighet> behorigheter = new ArrayList<Behorighet>();
 
         User user = new User(UUID.randomUUID().toString(), "Roger Pontare" );
-        String[] kategorier = {"Första", "Tredje"};
 
-        Behorighet behorighet = new Behorighet(UUID.randomUUID().toString(),"Systemaccess" , kategorier , "Ger access till systemet.", user);
+        Behorighet behorighet = new Behorighet(UUID.randomUUID().toString(),"Systemaccess" , Arrays.asList("Första", "Tredje") , "Ger access till systemet.", user);
         behorighet.setId(UUID.randomUUID().toString());
 
         behorigheter.add(behorighet);

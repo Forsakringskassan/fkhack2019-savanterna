@@ -3,15 +3,18 @@ package se.fk.behorighetsportalen.server.behorighet.rest;
 import se.fk.behorighetsportalen.server.user.rest.User;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Behorighet {
     private String id;
     private String namn;
-    private String[] kategorier;
+    private List<String> kategorier;
     private String beskrivning;
     private User granskare;
 
-    public Behorighet(String id, String namn, String[] kategorier, String beskrivning, User granskare) {
+    public Behorighet() { super(); }
+
+    public Behorighet(String id, String namn, List<String> kategorier, String beskrivning, User granskare) {
         this.id = id;
         this.namn = namn;
         this.kategorier = kategorier;
@@ -35,11 +38,11 @@ public class Behorighet {
         this.namn = namn;
     }
 
-    public String[] getKategorier() {
+    public List<String> getKategorier() {
         return kategorier;
     }
 
-    public void setKategorier(String[] kategorier) {
+    public void setKategorier(List<String> kategorier) {
         this.kategorier = kategorier;
     }
 
@@ -64,7 +67,7 @@ public class Behorighet {
         return "Behorighet{" +
                 "id='" + id + '\'' +
                 ", namn='" + namn + '\'' +
-                ", kategorier=" + Arrays.toString(kategorier) +
+                ", kategorier=" + kategorier +
                 ", beskrivning='" + beskrivning + '\'' +
                 ", granskare=" + granskare +
                 '}';
