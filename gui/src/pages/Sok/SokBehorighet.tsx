@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Header, Container, Grid, Segment, Search, Dropdown } from "semantic-ui-react"; 
-import BehorigheterAllUser from "./Behorigheter-all-user";
+import BehorigheterAllUser from "../Behorigheter/Behorigheter-all-user";
 
 const mockResults = [{  
   key: "GIT User",
