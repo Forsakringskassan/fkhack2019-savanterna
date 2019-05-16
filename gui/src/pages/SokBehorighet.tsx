@@ -3,12 +3,29 @@ import { Header, Container, Grid, Segment, Search, Dropdown } from "semantic-ui-
 import BehorigheterAllUser from "./Behorigheter-all-user";
 
 const mockResults = [{  
-  key: "Behörighet1",
-  value: "Behörighet1",
-  text: "Behörighetsbeskrivning"},
-  {key: "Behörighet2",
-  value: "Behörighet2",
-  text: "Behörighetsbeskrivning2 :D"}]
+  key: "GIT User",
+  value: "Git user",
+  text: "Git user - Behörighet för att komma åt GIT"
+  },
+  {
+  key: "Stash user",
+  value: "Stash user",
+  text: "Stash user - Behörighet för att komma åt Stash."
+},
+{
+  key: "BLIP user",
+  value: "BLIP user",
+  text: "BLIP user - Behörighet för att använda BLIP",
+},
+{
+  key: "BLIP Admin",
+  value: "BLIP Admin",
+  text: "BLIP Admin -Behörighet för att administrera BLIP",
+},{
+  key: "Citrix user",
+  value: "Citrix user",
+  text: "Citrix user - Behörighet för åtkomst till Citrix",
+}]
 
 interface Props {
 }
@@ -38,11 +55,8 @@ export class SokBehorighet extends React.Component<State, Props> {
             search
             selection
             options={mockResults}
-          
+            scrolling
 
-          
-          
-          
           />
 
       </Container>
