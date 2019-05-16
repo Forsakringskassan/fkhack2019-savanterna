@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Segment, Header, Card, Table, Button, Container } from "semantic-ui-react";
-import Behorighet from "../classes/Behorighet";
+import Behorighet from "../../classes/Behorighet";
 
 export interface ansokning {
     user: string,
