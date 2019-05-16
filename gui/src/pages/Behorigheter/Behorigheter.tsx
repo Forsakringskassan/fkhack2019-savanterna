@@ -52,7 +52,7 @@ export class Behorigheter extends React.Component<{}, State> {
 
         return (
             <Container>
-                <Header as={"h1"}>Behörigheter och ansökningar</Header>
+                <Header as={"h1"} dividing>Behörigheter och ansökningar</Header>
 
                 <Tab panes={this.getPanes()}/>
             </Container>

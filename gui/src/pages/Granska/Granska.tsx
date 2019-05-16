@@ -67,7 +67,7 @@ export class Granska extends React.Component<{}, {}> {
     render() {
         return (
             <Container>
-                <Header as={"h1"}>Granska</Header>
+                <Header as={"h1"} dividing>Granska behörigheter</Header>
 
                 <Header as={"h2"} dividing>Inkomna ansökningar</Header>
                 <Table padded compact>
