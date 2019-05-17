@@ -15,15 +15,16 @@ export class Behorigheter extends React.Component<{}, State> {
     constructor(props: any){
         super(props);
 
-        let b1:Behorighet = new Behorighet("1", "Behörighet1", "Denna används för blip", []);
-        let b2:Behorighet = new Behorighet("2", "Behörighet2", "Denna används för asdasd", []);
-        let b3:Behorighet = new Behorighet("3", "Behörighet3", "Denna används för dededede", []);
-        let b4:Behorighet = new Behorighet("4", "Behörighet4", "Denna används för deasdaersf", []);
+        let b1:Behorighet = new Behorighet("1", "GStashUser", "Ger läsrättigheter till Stash", ["Systemutvecklare"]);
+        let b2:Behorighet = new Behorighet("2", "GConfluenceUser", "Ger läsrättigheter till Confluence", ["Systemutvecklare", "IT-Samordnare", "Confluence"]);
+        let b3:Behorighet = new Behorighet("3", "GSuperUserWin10", "Ger sudo-rättigheter till Windows 10", ["Systemutvecklare"]);
+        let b4:Behorighet = new Behorighet("4", "GSkypeUser", "Ger rättigheter att ringa via Skype", ["Systemutvecklare", "Testare", "IT-samordnare"]);
 
         let ongoing = new Map<Behorighet, string>();
         ongoing.set(b1, "Pågående");
-        ongoing.set(b2, "Ej godkänd");
-        ongoing.set(b3, "Godkänd");
+        ongoing.set(b2, "Godkänd");
+        ongoing.set(b3, "Ej godkänd");
+        ongoing.set(b4, "Godkänd");
 
         let behorigheter: Array<Behorighet> = [];
         behorigheter.push(b1);
