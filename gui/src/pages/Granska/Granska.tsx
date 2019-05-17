@@ -73,9 +73,9 @@ export class Granska extends React.Component<{}, {}> {
                 <Table padded compact>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell content={"Användare"}/>
-                            <Table.HeaderCell content={"Behörighet"}/>
-                            <Table.HeaderCell content={"Godkänn/Neka"}/>
+                            <Table.HeaderCell content={"Användare"} width={"3"}/>
+                            <Table.HeaderCell content={"Behörighet"} width={"3"}/>
+                            <Table.HeaderCell content={"Godkänn/Neka"} width={"3"}/>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
@@ -87,9 +87,9 @@ export class Granska extends React.Component<{}, {}> {
                 <Table padded compact>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell content={"Användare"}/>
-                            <Table.HeaderCell content={"Behörighet"}/>
-                            <Table.HeaderCell content={"Redigera"}/>
+                            <Table.HeaderCell content={"Användare"} width={"3"}/>
+                            <Table.HeaderCell content={"Behörighet"} width={"3"}/>
+                            <Table.HeaderCell content={"Redigera"} width={"3"}/>
                         </Table.Row>
                     </Table.Header>
                         <Table.Body>

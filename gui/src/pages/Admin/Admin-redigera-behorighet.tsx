@@ -25,13 +25,13 @@ export class AdminRedigeraBehorighet extends React.Component<{}, {}> {
             } else {
               throw new Error('Something went wrong');
             }
-          })
-          .then((results) => {
+        })
+        .then((results) => {
             console.log(results);
-          })
-          .catch((error) => {
+        })
+        .catch((error) => {
             console.error(error);
-          });
+        });
     }
 
     getRowsInkomna(){
