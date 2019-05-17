@@ -1,14 +1,13 @@
 import * as React from "react";
 
 import {Header, Container, Tab} from "semantic-ui-react";
-import Behorighet from "../../classes/Behorighet";
 import BehorigheterAllUser from "./Behorigheter-all-user";
 import BehorigheterOngoing from "./Behorigheter-ongoing";
 import RestService from "../../rest/rest-service";
 import RestInterface from "../../rest/rest-interface";
 
 interface State {
-    behorigheter: Array<Behorighet>;
+    behorigheter: Array<RestInterface.Behorighet>;
     ongoing: Array<RestInterface.Ansokan>;
     sendPostRequest: boolean;
     user: RestInterface.User;
@@ -36,7 +35,6 @@ export class Behorigheter extends React.Component<{}, State> {
     }
 
     getAnsokningar(){
-        if(this.state.sendPostRequest){
             let self = this;
             RestService.hamtaUserAnsokningar(this.state.user.id)
                 .then((response) => {
@@ -52,8 +50,6 @@ export class Behorigheter extends React.Component<{}, State> {
                         sok.push(results[index]);
                     }
 
-                    console.log(sok)
-
                     self.setState({
                         sendPostRequest: false,
                         ongoing: sok
@@ -65,11 +61,9 @@ export class Behorigheter extends React.Component<{}, State> {
                         sendPostRequest: false,
                     });
                 });
-        }
     }
 
     getBehorigheter(){
-        if(this.state.sendPostRequest){
             let self = this;
             RestService.hamtaUserBehorigheter(this.state.user.id)
                 .then((response) => {
@@ -96,7 +90,6 @@ export class Behorigheter extends React.Component<{}, State> {
                         sendPostRequest: false,
                     });
                 });
-        }
     }
 
     getPanes() {

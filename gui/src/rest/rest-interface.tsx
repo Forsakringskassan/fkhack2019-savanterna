@@ -29,7 +29,7 @@ namespace RestInterface{
         behorighet: RestInterface.Behorighet;
         userId: string;
         granskare: RestInterface.User;
-        status: number;
+        status: string;
     }
 }
 

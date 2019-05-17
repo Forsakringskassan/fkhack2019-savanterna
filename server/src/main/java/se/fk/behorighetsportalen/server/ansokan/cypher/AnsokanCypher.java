@@ -66,7 +66,11 @@ public class AnsokanCypher {
 
     public static void uppdateraAnsokan(String ansokanId, int status, Session session) {
         String query = "MATCH(a:Ansökan {id : {id}}) " +
-                "SET a.status = {status} ";
+                "SET a.status = {status} " +
+                "WITH a " +
+                "MATCH(a)<-[:SKAPAT]->(u:User) " +
+                "MATCH(a)-[:ANSÖKER]->(b:Behörighet) " +
+                "MERGE(u)-[:HAR_BEHÖRIGHET]->(b)";
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("id", ansokanId);
         parameters.put("status", status);

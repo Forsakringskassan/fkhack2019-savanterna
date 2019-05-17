@@ -1,14 +1,14 @@
 import * as React from "react";
 
-import {List} from "semantic-ui-react";
-import Behorighet from "../../classes/Behorighet";
+import {Label, List} from "semantic-ui-react";
+import RestInterface from "../../rest/rest-interface";
 
 interface Props {
-    behorigheter: Array<Behorighet>;
+    behorigheter: Array<RestInterface.Behorighet>;
 }
 
 interface State {
-    behorigheter: Array<Behorighet>;
+    behorigheter: Array<RestInterface.Behorighet>;
 }
 
 export class BehorigheterAllUser extends React.Component<Props, State> {
@@ -31,13 +31,21 @@ export class BehorigheterAllUser extends React.Component<Props, State> {
         let render: Array<any> = [];
         if(this.state.behorigheter !== undefined) {
             this.state.behorigheter.forEach(item => {
+
+                let kategorier:Array<any> = [];
+                item.kategorier.forEach(kat => {
+                    kategorier.push(<Label key={kat.id} >{ kat.namn }</Label>)
+                });
+
                 render.push(<List.Item key={item.id}>
                     <List.Content>
                         <List.Header>
-                            { item.name }
+                            { item.namn }
                         </List.Header>
                         <List.Description>
-                            { item.description }
+                            { item.beskrivning }
+                            <br/>
+                            {kategorier}
                         </List.Description>
                     </List.Content>
                 </List.Item>);

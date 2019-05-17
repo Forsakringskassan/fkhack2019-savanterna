@@ -85,7 +85,7 @@ export class SokBehorighet extends React.Component<Props, State> {
             granskare: behorighet.granskare,
             id: null,
             userId: this.state.user.id,
-            status: 0
+            status: null
         };
 
         RestService.skapaAnsokan(ansokan.userId, ansokan.behorighet.id)
