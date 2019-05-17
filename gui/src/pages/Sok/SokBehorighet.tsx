@@ -71,7 +71,7 @@ export class SokBehorighet extends React.Component<Props, State> {
             sendPostRequest: false,
           });
       });
-    }    
+    }
   }
 
   handleChange(event: any, data: any){

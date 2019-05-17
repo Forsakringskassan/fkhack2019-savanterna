@@ -1,5 +1,11 @@
 namespace RestInterface{
 
+    export interface dropdownItem {
+        key: any;
+        text: any;
+        value: any;
+    }
+
     export interface Behorighet {
         id: string;
         namn: string;
