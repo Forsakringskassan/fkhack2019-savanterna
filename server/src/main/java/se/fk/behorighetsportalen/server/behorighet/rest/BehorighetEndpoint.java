@@ -22,7 +22,7 @@ public class BehorighetEndpoint {
 
     @POST
     @Path("/skapa")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response skapaBehorighet(Behorighet behorighet) {
         logger.info("BehorighetEndpoint.skapaBehorighet()");
 

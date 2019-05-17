@@ -1,14 +1,14 @@
 import RestInterface from "./rest-interface";
 
-const API = "http://localhost:8080";
+const API = "http://localhost:8080/rest";
 
 const RestService = {
 
     getApi(){ return(this.API); },
-    getBehorighetEndpoint(){ return(this.API + "/v1/behorighet"); },
-    getKategoriEndpoint(){ return(this.API + "/kategori"); },
-    getUserEndpoint(){ return(this.API + "/v1/user"); },
-    getAnsokningarEndpoint(){ return(this.API + "/v1/ansokan"); },
+    getBehorighetEndpoint(){ return(API + "/v1/behorighet"); },
+    getKategoriEndpoint(){ return(API + "/v1/kategori"); },
+    getUserEndpoint(){ return(API + "/v1/user"); },
+    getAnsokningarEndpoint(){ return(API + "/v1/ansokan"); },
 
     skapaBehorighet(behorighet: RestInterface.Behorighet){
         return(fetch(this.getBehorighetEndpoint() + "/skapa", { method: 'POST', body: JSON.stringify(behorighet) }));

@@ -74,7 +74,7 @@ export class AdminSkapaBehorighet extends React.Component<Props, State> {
                 kategorier: self.state.kategorier,
                 beskrivning: self.state.beskrivning,
                 granskare: self.state.granskare,
-            }
+            };
 
             RestService.skapaBehorighet(behorighet)
             .then((response) => {
