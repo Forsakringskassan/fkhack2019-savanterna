@@ -11,10 +11,10 @@ export class AdminRedigeraBehorighet extends React.Component<{}, {}> {
         this.update();
     }
 
-    b1:Behorighet = new Behorighet("1", "Behörighet1", "Denna används för blip", ["Systemutvecklare", "IT-samordnare"]);
-    b2:Behorighet = new Behorighet("2", "Behörighet2", "Denna används för asdasd", ["Mars", "Sysadmin"]);
-    b3:Behorighet = new Behorighet("3", "Behörighet3", "Denna används för dededede", ["Jupiter"]);
-    b4:Behorighet = new Behorighet("4", "Behörighet4", "Denna används för deasdaersf", []);
+    b1:Behorighet = new Behorighet("1", "GStashUser", "Ger läsrättigheter till Stash", ["Systemutvecklare"]);
+    b2:Behorighet = new Behorighet("2", "GConfluenceUser", "Ger läsrättigheter till Confluence", ["Systemutvecklare", "IT-Samordnare", "Confluence"]);
+    b3:Behorighet = new Behorighet("3", "GSuperUserWin10", "Ger sudo-rättigheter till Windows 10", ["Systemutvecklare"]);
+    b4:Behorighet = new Behorighet("4", "GSkypeUser", "Ger rättigheter att ringa via Skype", ["Systemutvecklare", "Testare", "IT-samordnare"]);
 
     behorigheter : Array<Behorighet> = [this.b1,this.b2, this.b3, this.b4]
     update(){

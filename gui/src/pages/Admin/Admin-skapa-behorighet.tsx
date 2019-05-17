@@ -119,7 +119,7 @@ export class AdminSkapaBehorighet extends React.Component<Props, State> {
                     <Form.Select fluid multiple label='Kategori' options={this.state.kategoriOptions} onChange={this.kategoriChange.bind(this)} placeholder='Kategori' />
                 </Form.Group>
                 <Form.TextArea label='Beskrivning' placeholder='Ange en beskrivning...' onChange={this.beskrivningChange.bind(this)}/>
-                <Form.Input fluid readOnly={true} label='Granskare' placeholder='Per Persson (66015024)' />
+                <Form.Input fluid readOnly={true} label='Granskare' placeholder='Martin Gunnarsson (66120403)' />
                 <Form.Button positive onClick={this.sendPostRequest.bind(this)}>Skapa</Form.Button>
             </Form>
         )
