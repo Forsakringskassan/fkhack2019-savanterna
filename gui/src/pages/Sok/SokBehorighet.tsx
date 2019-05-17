@@ -15,28 +15,6 @@ interface State {
 
 export class SokBehorighet extends React.Component<Props, State> {
 
-  b1: RestInterface.Behorighet = {
-    id: "1", 
-    namn: "GStashUser", 
-    beskrivning: "Ger läsrättigheter till Stash", 
-    kategorier: [{id: "1", namn: "Systemutvecklare"}],
-    granskare: {id: "1", namn: "Kalle Karlsson"}  
-  };
-  b2: RestInterface.Behorighet = {
-    id: "2", 
-    namn: "GConfluenceUser", 
-    beskrivning: "Ger läsrättigheter till Confluence", 
-    kategorier: [{id: "1", namn: "Systemutvecklare"}, {id: "2", namn: "IT-Samordnare"}],
-    granskare: {id: "2", namn: "Anna Andersson"}  
-  };
-  b3: RestInterface.Behorighet = {
-    id: "3", 
-    namn: "GSuperUserWin10", 
-    beskrivning: "Ger sudo-rättigheter till Windows 10", 
-    kategorier: [{id: "1", namn: "Systemutvecklare"}],
-    granskare: {id: "2", namn: "Anna Andersson"}  
-  };
-
   constructor(props: any){
     super(props);
     this.state = {
@@ -59,15 +37,19 @@ export class SokBehorighet extends React.Component<Props, State> {
           }
       })
       .then((results) => {
+        let sok = [];
+        for(let index in results) {
+          sok.push(results[index]);
+        }
+
         self.setState({
-          results: [this.b1, this.b2, this.b3],
+          results: sok,
           sendPostRequest: false,
         });
       })
       .catch((error) => {
           console.error(error);
           self.setState({
-            results: [this.b1, this.b2, this.b3],
             sendPostRequest: false,
           });
       });

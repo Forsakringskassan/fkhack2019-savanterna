@@ -65,12 +65,12 @@ public class Behorighet {
 
     @Override
     public String toString() {
-        return "Behorighet{" +
-                "id=" + id +
-                ", namn=" + namn +
-                ", kategorier=" + kategorier +
-                ", beskrivning=" + beskrivning +
-                ", granskare=" + granskare +
-                "}";
+        return "Behorighet[" +
+                "id: " + id +
+                ", namn: " + namn +
+                ", kategorier: " + kategorier +
+                ", beskrivning: " + beskrivning +
+                ", granskare: " + granskare +
+                "]";
     }
 }

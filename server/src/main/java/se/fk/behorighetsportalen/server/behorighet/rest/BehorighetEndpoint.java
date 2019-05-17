@@ -54,9 +54,8 @@ public class BehorighetEndpoint {
         }
     }
 
-    @POST
+    @DELETE
     @Path("/radera/{id}")
-    @Consumes(MediaType.TEXT_PLAIN)
     public Response raderaBehorighet(@PathParam("id") String id) {
         logger.info("BehorighetEndpoint.raderaBehorighet()");
         try {
@@ -71,7 +70,7 @@ public class BehorighetEndpoint {
 
     @GET
     @Path("/hamta")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response hamtaBehorighet() {
         logger.info("BehorighetEndpoint.hamtaBehorighet()");
         try {
@@ -85,7 +84,7 @@ public class BehorighetEndpoint {
 
     @GET
     @Path("/sok")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response sokBehorighet(@QueryParam("input") String input) {
         logger.info("BehorighetEndpoint.sokBehorighet()");
 
