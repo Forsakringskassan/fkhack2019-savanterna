@@ -48,15 +48,15 @@ const RestService = {
     },
 
     hamtaUserBehorigheter(userId: string){
-        return(fetch(this.getKategoriEndpoint() + "behorigheter/hamta/" + userId, { method: 'GET' }));
+        return(fetch(this.getUserEndpoint() + "/" + userId + "/behorigheter/hamta", { method: 'GET' }));
     },
 
     hamtaUserAnsokningar(userId: string){
-        return(fetch(this.getKategoriEndpoint() + "ansokningar/hamta/" + userId, { method: 'GET' }));
+        return(fetch(this.getUserEndpoint() + "/" + userId + "/ansokningar/hamta", { method: 'GET' }));
     },
 
-    skapaAnsokan(ansokan: RestInterface.Ansokan){
-        return(fetch(this.getAnsokningarEndpoint() + "/skapa", { method: 'POST', body: JSON.stringify(ansokan) }));
+    skapaAnsokan(userId: string, behorighetId: string){
+        return(fetch(this.getAnsokningarEndpoint() + "/skapa/" + userId + "/" + behorighetId , { method: 'POST' }));
     },
 
     uppdateraAnsokan(ansokanId: string){

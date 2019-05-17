@@ -10,6 +10,7 @@ interface State {
   isLoading: boolean,
   results: Array<RestInterface.Behorighet>,
   value: string,
+    user: RestInterface.User,
   sendPostRequest: boolean,
 }
 
@@ -20,6 +21,10 @@ export class SokBehorighet extends React.Component<Props, State> {
     this.state = {
       isLoading: false,
       results: [],
+        user: {
+            id: "66120403",
+            namn: "Martin Gunnarsson"
+        },
       value: "",
       sendPostRequest: false,
     };    
@@ -68,6 +73,37 @@ export class SokBehorighet extends React.Component<Props, State> {
     }, () => this.sendPostRequest());
   }
 
+    handleBestall(event: any, data: any) {
+      console.log(event, data);
+
+        let behorighet: RestInterface.Behorighet = data.behorighet;
+        console.log(behorighet)
+        let self = this;
+
+        let ansokan: RestInterface.Ansokan = {
+            behorighet: behorighet,
+            granskare: behorighet.granskare,
+            id: null,
+            userId: this.state.user.id,
+            status: 0
+        };
+
+        RestService.skapaAnsokan(ansokan.userId, ansokan.behorighet.id)
+            .then((response) => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                self.setState({
+                    sendPostRequest: false,
+                });
+            });
+    }
+
   getResults(){
     let results = this.state.results;
     let search = this.state.value.toLowerCase();
@@ -91,10 +127,10 @@ export class SokBehorighet extends React.Component<Props, State> {
             )}
           </List>
         </Table.Cell>
-        <Table.Cell key={item.id + "beställ"}><Button positive content={"Beställ"}/></Table.Cell>
+        <Table.Cell key={item.id + "beställ"}><Button behorighet={item} onClick={this.handleBestall.bind(this)} positive content={"Beställ"}/></Table.Cell>
       </Table.Row>
     ));
-    
+
     return(
       <div>
         <Header as={"h2"} dividing>Resultat:</Header>        

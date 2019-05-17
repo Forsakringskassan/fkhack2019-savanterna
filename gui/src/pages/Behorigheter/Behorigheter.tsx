@@ -4,10 +4,14 @@ import {Header, Container, Tab} from "semantic-ui-react";
 import Behorighet from "../../classes/Behorighet";
 import BehorigheterAllUser from "./Behorigheter-all-user";
 import BehorigheterOngoing from "./Behorigheter-ongoing";
+import RestService from "../../rest/rest-service";
+import RestInterface from "../../rest/rest-interface";
 
 interface State {
     behorigheter: Array<Behorighet>;
-    ongoing: Map<Behorighet, string>;
+    ongoing: Array<RestInterface.Ansokan>;
+    sendPostRequest: boolean;
+    user: RestInterface.User;
 }
 
 export class Behorigheter extends React.Component<{}, State> {
@@ -15,27 +19,84 @@ export class Behorigheter extends React.Component<{}, State> {
     constructor(props: any){
         super(props);
 
-        let b1:Behorighet = new Behorighet("1", "GStashUser", "Ger läsrättigheter till Stash", ["Systemutvecklare"]);
-        let b2:Behorighet = new Behorighet("2", "GConfluenceUser", "Ger läsrättigheter till Confluence", ["Systemutvecklare", "IT-Samordnare", "Confluence"]);
-        let b3:Behorighet = new Behorighet("3", "GSuperUserWin10", "Ger sudo-rättigheter till Windows 10", ["Systemutvecklare"]);
-        let b4:Behorighet = new Behorighet("4", "GSkypeUser", "Ger rättigheter att ringa via Skype", ["Systemutvecklare", "Testare", "IT-samordnare"]);
-
-        let ongoing = new Map<Behorighet, string>();
-        ongoing.set(b1, "Pågående");
-        ongoing.set(b2, "Godkänd");
-        ongoing.set(b3, "Ej godkänd");
-        ongoing.set(b4, "Godkänd");
-
-        let behorigheter: Array<Behorighet> = [];
-        behorigheter.push(b1);
-        behorigheter.push(b2);
-        behorigheter.push(b3);
-        behorigheter.push(b4);
-
         this.state = {
-            behorigheter: behorigheter,
-            ongoing: ongoing
+            behorigheter: [],
+            ongoing: [],
+            sendPostRequest: true,
+            user: {
+                id: "66120403",
+                namn: "Martin Gunnarsson"
+            }
         };
+    }
+
+    componentDidMount(): void {
+        this.getBehorigheter();
+        this.getAnsokningar();
+    }
+
+    getAnsokningar(){
+        if(this.state.sendPostRequest){
+            let self = this;
+            RestService.hamtaUserAnsokningar(this.state.user.id)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Something went wrong');
+                    }
+                })
+                .then((results) => {
+                    let sok = [];
+                    for(let index in results) {
+                        sok.push(results[index]);
+                    }
+
+                    console.log(sok)
+
+                    self.setState({
+                        sendPostRequest: false,
+                        ongoing: sok
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                    self.setState({
+                        sendPostRequest: false,
+                    });
+                });
+        }
+    }
+
+    getBehorigheter(){
+        if(this.state.sendPostRequest){
+            let self = this;
+            RestService.hamtaUserBehorigheter(this.state.user.id)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Something went wrong');
+                    }
+                })
+                .then((results) => {
+                    let sok = [];
+                    for(let index in results) {
+                        sok.push(results[index]);
+                    }
+
+                    self.setState({
+                        sendPostRequest: false,
+                        behorigheter: sok
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                    self.setState({
+                        sendPostRequest: false,
+                    });
+                });
+        }
     }
 
     getPanes() {

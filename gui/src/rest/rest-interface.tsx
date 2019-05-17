@@ -26,9 +26,10 @@ namespace RestInterface{
     
     export interface Ansokan {
         id: string;
-        behorighetsId: string;
+        behorighet: RestInterface.Behorighet;
         userId: string;
-        granskarId: string;
+        granskare: RestInterface.User;
+        status: number;
     }
 }
 

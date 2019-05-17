@@ -1,14 +1,14 @@
 import * as React from "react";
 
 import {Table} from "semantic-ui-react";
-import Behorighet from "../../classes/Behorighet";
+import RestInterface from "../../rest/rest-interface";
 
 interface Props {
-    ongoing: Map<Behorighet, string>;
+    ongoing: Array<RestInterface.Ansokan>;
 }
 
 interface State {
-    ongoing: Map<Behorighet, string>;
+    ongoing: Array<RestInterface.Ansokan>;
 }
 
 export class BehorigheterOngoing extends React.Component<Props, State> {
@@ -29,9 +29,10 @@ export class BehorigheterOngoing extends React.Component<Props, State> {
 
     getRows() {
         let render: Array<any> = [];
-        this.state.ongoing.forEach((status, behorighet, other) => {
-            render.push(
-                <Table.Row key={behorighet.id} error={status === "Ej godkänd"} positive={status === "Godkänd"} >
+        this.state.ongoing.forEach((item) => {
+            console.log(item)
+            /*render.push(
+                <Table.Row key={item.} error={status === "Ej godkänd"} positive={status === "Godkänd"} >
                     <Table.Cell>
                         {behorighet.name}
                     </Table.Cell>
@@ -39,7 +40,7 @@ export class BehorigheterOngoing extends React.Component<Props, State> {
                         {status}
                     </Table.Cell>
                 </Table.Row>
-            );
+            );*/
         });
 
         return render;
