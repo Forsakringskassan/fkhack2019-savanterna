@@ -79,13 +79,10 @@ export class AdminSkapaBehorighet extends React.Component<Props, State> {
             RestService.skapaBehorighet(behorighet)
             .then((response) => {
                 if (response.ok) {
-                return response.json();
+                    window.location.reload();
                 } else {
                 throw new Error('Something went wrong');
                 }
-            })
-            .then((results) => {
-                window.location.reload();
             })
             .catch((error) => {
                 console.error(error);
@@ -100,8 +97,15 @@ export class AdminSkapaBehorighet extends React.Component<Props, State> {
     }
 
     kategoriChange(event: any, data: any) {
+
+        let kategorier = [];
+        for(let value in data.value) {
+            console.log(data.value[value])
+            kategorier.push({ "id" : data.value[value], "namn": null });
+        }
+
         this.setState ({
-            kategorier: data.value,
+            kategorier: kategorier,
         });
     }
 

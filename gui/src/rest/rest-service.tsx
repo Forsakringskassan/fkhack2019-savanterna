@@ -11,7 +11,12 @@ const RestService = {
     getAnsokningarEndpoint(){ return(API + "/v1/ansokan"); },
 
     skapaBehorighet(behorighet: RestInterface.Behorighet){
-        return(fetch(this.getBehorighetEndpoint() + "/skapa", { method: 'POST', body: JSON.stringify(behorighet) }));
+        return(fetch(this.getBehorighetEndpoint() + "/skapa", {
+            method: 'POST',
+            body: JSON.stringify(behorighet),
+            headers: {
+                'Content-Type': 'application/json',
+            }}));
     },
 
     uppdateraBehorighet(behorighet: RestInterface.Behorighet){

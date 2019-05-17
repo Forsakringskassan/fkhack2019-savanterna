@@ -40,7 +40,7 @@ public class BehorighetEndpoint {
 
     @POST
     @Path("/uppdatera")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response uppdateraBehorighet(Behorighet behorighet) {
         logger.info("BehorighetEndpoint.uppdateraBehorighet()");
 
@@ -56,7 +56,7 @@ public class BehorighetEndpoint {
 
     @POST
     @Path("/radera/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
     public Response raderaBehorighet(@PathParam("id") String id) {
         logger.info("BehorighetEndpoint.raderaBehorighet()");
         try {
