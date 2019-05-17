@@ -27,7 +27,7 @@ export class App extends React.Component<{}, {}> {
 
                         <Menu.Item position='right'>
                             <Icon name='user'/>
-                            Inloggad som: Per Persson (66015024)
+                            Inloggad som: Martin Gunnarsson (66120403)
                         </Menu.Item>
                     </Menu>
                     <Segment basic className='content'>

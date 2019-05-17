@@ -22,8 +22,8 @@ export class AdminSkapaBehorighet extends React.Component<Props, State> {
         this.state = {
             gruppnamn: "",
             granskare: {
-                id: "1",
-                namn: "Per Persson"
+                id: "66120403",
+                namn: "Martin Gunnarsson"
             },
             kategorier: [],
             beskrivning: "",
