@@ -23,7 +23,7 @@ public class UserEndpoint {
 
     @POST
     @Path("/skapa")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(User user) {
         logger.info("UserEndpoint.createUser()");
         try {

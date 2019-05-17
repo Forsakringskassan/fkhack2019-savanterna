@@ -23,7 +23,7 @@ public class KategoriCypher {
 
         Map parameters = new HashMap<String, Object>();
         parameters.put("namn", kategori.getNamn());
-        parameters.put("id", CypherUtil.generateId());
+        parameters.put("id", kategori.getId() != null ? kategori.getId() : CypherUtil.generateId());
         session.run(cypher, parameters);
     }
 
