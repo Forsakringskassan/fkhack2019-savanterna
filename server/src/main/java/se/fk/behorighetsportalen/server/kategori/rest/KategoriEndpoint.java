@@ -39,11 +39,7 @@ public class KategoriEndpoint {
         logger.info("KategoriEndpoint.hamtaKategorier()");
 
         try {
-            List kategorier=new ArrayList <Kategori> ();
-            kategorier.add(new Kategori("Systemutvecklare BI","1"));
-            kategorier.add(new Kategori("Projektledare","2"));
-            kategorier.add(new Kategori("IT-Tekniker","3"));
-
+            List kategorier = KategoriCypher.getKategorier(DatabaseConnector.getSession());
             return Response.ok().entity(kategorier).build();
         } catch (Exception e) {
             e.printStackTrace();

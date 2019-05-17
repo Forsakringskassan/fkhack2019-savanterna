@@ -8,10 +8,7 @@ import se.fk.behorighetsportalen.server.exception.ServerException;
 import se.fk.behorighetsportalen.server.kategori.rest.Kategori;
 import se.fk.behorighetsportalen.server.user.rest.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BehorighetCypher {
 
@@ -194,4 +191,9 @@ public class BehorighetCypher {
         return behorigheter;
     }
 
+    public static Behorighet hamtaBehorighet(String b, Transaction tx) {
+        List<String> ids = Arrays.asList(b);
+        List<Behorighet> behorigheter = hamtaBehorigheter(ids, tx);
+        return behorigheter.size() > 0 ? behorigheter.get(0) : null;
+    }
 }

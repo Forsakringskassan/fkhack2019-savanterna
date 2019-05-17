@@ -1,11 +1,13 @@
 package se.fk.behorighetsportalen.server.kategori.cypher;
 
 import org.neo4j.driver.v1.*;
+import org.neo4j.driver.v1.types.Node;
 import se.fk.behorighetsportalen.server.CypherUtil;
 import se.fk.behorighetsportalen.server.behorighet.cypher.BehorighetCypher;
 import se.fk.behorighetsportalen.server.behorighet.rest.Behorighet;
 import se.fk.behorighetsportalen.server.kategori.rest.Kategori;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,5 +46,22 @@ public class KategoriCypher {
             tx.success();
         }
         return behorigheter;
+    }
+
+    public static List getKategorier(Session session) {
+        List<Kategori> kategorier = new ArrayList<>();
+        String query = "MATCH(k:Kategori) RETURN DISTINCT k";
+        StatementResult sr = session.run(query);
+        while(sr.hasNext()) {
+            Record record = sr.next();
+            Node k = record.get("k").asNode();
+
+            Kategori kategori = new Kategori();
+            kategori.setNamn(k.get("namn").asString());
+            kategori.setId(k.get("id").asString());
+            kategorier.add(kategori);
+        }
+
+        return kategorier;
     }
 }

@@ -1,5 +1,7 @@
 package se.fk.behorighetsportalen.server;
 
+import se.fk.behorighetsportalen.server.ansokan.rest.Ansokan;
+
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Locale;
@@ -24,6 +26,19 @@ public class CypherUtil {
             buf[idx] = symbolChar[random.nextInt(symbolChar.length)];
         }
         return new String(buf);
+    }
+
+    public static Ansokan.Status convertToStatus(int status) {
+        switch (status) {
+            case 0:
+                return Ansokan.Status.PÅBÖRJAD;
+            case 1:
+                return Ansokan.Status.BEVILJAD;
+            case 2:
+                return Ansokan.Status.NEKAD;
+            default:
+                return Ansokan.Status.PÅBÖRJAD;
+        }
     }
 }
 

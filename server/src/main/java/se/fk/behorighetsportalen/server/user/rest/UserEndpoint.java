@@ -2,18 +2,19 @@ package se.fk.behorighetsportalen.server.user.rest;
 
 import org.jboss.logging.Logger;
 import se.fk.behorighetsportalen.server.CypherUtil;
+import se.fk.behorighetsportalen.server.ansokan.rest.Ansokan;
+import se.fk.behorighetsportalen.server.behorighet.cypher.BehorighetCypher;
 import se.fk.behorighetsportalen.server.behorighet.rest.Behorighet;
 import se.fk.behorighetsportalen.server.behorighet.rest.BehorighetEndpoint;
+import se.fk.behorighetsportalen.server.database.DatabaseConnector;
 import se.fk.behorighetsportalen.server.kategori.rest.Kategori;
+import se.fk.behorighetsportalen.server.user.cypher.UserCypher;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 @Path("/v1/user")
 public class UserEndpoint {
@@ -23,11 +24,11 @@ public class UserEndpoint {
     @POST
     @Path("/skapa")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response createUser() {
+    public Response createUser(User user) {
         logger.info("UserEndpoint.createUser()");
-//Todo: Skapa användare i DB
         try {
-            return Response.ok().entity("").build();
+            UserCypher.createUser(user, DatabaseConnector.getSession());
+            return Response.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();
@@ -35,21 +36,10 @@ public class UserEndpoint {
     }
 
     @GET
-    @Path("behorigheter/hamta/{id}")
+    @Path("/{userId}/behorigheter/hamta")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response hamtaBehorigheter(@PathParam("id") String userId) {
-        List<Behorighet> behorigheter = new ArrayList<Behorighet>();
-
-        User user = new User(UUID.randomUUID().toString(), "Roger Pontare" );
-
-        Kategori k1 = new Kategori(CypherUtil.generateId(), "Första");
-        Kategori k2 = new Kategori(CypherUtil.generateId(), "Andra");
-
-        Behorighet behorighet = new Behorighet(UUID.randomUUID().toString(),"Systemaccess" , Arrays.asList(k1, k2) , "Ger access till systemet.", user);
-        behorighet.setId(UUID.randomUUID().toString());
-
-        behorigheter.add(behorighet);
-
+    public Response hamtaBehorigheter(@PathParam("userId") String userId) {
+        List<Behorighet> behorigheter = UserCypher.getBehorigheter(userId, DatabaseConnector.getSession());
         try {
             return Response.ok().entity(behorigheter).build();
         } catch (Exception e){
@@ -59,16 +49,16 @@ public class UserEndpoint {
     }
 
     @GET
-    @Path("ansokningar/hamta/{id}")
+    @Path("/{userId}/ansokningar/hamta")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response hamtaAnsokningar(@PathParam("id") String userId){
+    public Response hamtaAnsokningar(@PathParam("userId") String userId){
         try {
-            return Response.ok().entity("").build();
+            List<Ansokan> ansokningar = UserCypher.getAnsokningar(userId, DatabaseConnector.getSession());
+            return Response.ok().entity(ansokningar).build();
         } catch (Exception e){
             e.printStackTrace();
             return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).build();
         }
     }
-
 
 }
